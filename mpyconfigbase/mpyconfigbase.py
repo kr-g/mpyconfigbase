@@ -7,6 +7,17 @@ def _get_machine_aes():
     import ucryptolib, ubinascii
     return ucryptolib.aes(ubinascii.hexlify( _get_machine_id() *2 ),1)
 
+class _State:
+    
+    def __init__( self, name, active=False, isconnected=False, ifconfig=None ):
+        self.name = name
+        self.active = active
+        self.isconnected = isconnected
+        self.ifconfig = ifconfig
+        
+    def __repr__(self):
+        return "<%s active=%s isconnected=%s ifconfig=%s>" % ( self.name, self.active, self.isconnected, self.ifconfig )
+
 
 class MPyConfigBase:
     
@@ -39,23 +50,20 @@ class MPyConfigBase:
         self.wlan_stop()
         self.softap_stop()
     
+    def _state( self, name, inet = None ):
+        if inet:
+            return _State( name, active=inet.active(), isconnected=inet.isconnected(), ifconfig=inet.ifconfig() )
+        return _State( name )
     
     def __repr__(self):
-        wlan_active=False
-        wlan_cfg=None
-        if self.wlan:
-            wlan_active = self.wlan.active()
-            wlan_cfg = self.wlan.ifconfig()
-        softap_active=False
-        softap_cfg=None
-        if self.ap:
-            softap_active = self.ap.active()
-            softap_cfg = self.ap.ifconfig()
-        webrepl_cfg = None
+        wlan_state = self._state("wlan",self.wlan)
+        softap_state=self._state("ap",self.ap)
+        
+        webrepl_state=self._state("webrepl")
         if self.webrepl:
-            webrepl_cfg = self.webrepl.network.WLAN().ifconfig()
-        return "wlan active=%s config=%s\nsoftap active=%s config=%s\nweb-repl active=%s config=%s" % (
-            wlan_active, wlan_cfg, softap_active, softap_cfg, self.webrepl, webrepl_cfg ) 
+            webrepl_state = self._state( "webrepl", self.webrepl.network.WLAN() )
+            
+        return "\n".join( [repr( wlan_state ), repr( softap_state ), repr( webrepl_state )] )
     
     def softap_config(self,ssid,passwd):
         """set softap ssid and password for automatic connection during startup"""
@@ -124,7 +132,7 @@ class MPyConfigBase:
         self.wlan_stop()
         uos.remove( MPyConfigBase.WLAN_CFG )
 
-    def wlan_start(self,active=True, configbase = None):
+    def wlan_start(self,active=True):
         """start wlan if configured before, otherwise do nothing"""
         try:
             import network
