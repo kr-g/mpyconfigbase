@@ -7,20 +7,20 @@ def _get_machine_aes():
     import ucryptolib, ubinascii
     return ucryptolib.aes(ubinascii.hexlify( _get_machine_id() *2 ),1)
 
-class _State:
-    
-    def __init__( self, name, active=False, isconnected=False, ifconfig=None ):
-        self.name = name
-        self.active = active
-        self.isconnected = isconnected
-        self.ifconfig = ifconfig
-        
-    def __repr__(self):
-        return "<%s active=%s isconnected=%s ifconfig=%s>" % ( self.name, self.active, self.isconnected, self.ifconfig )
-
 
 class MPyConfigBase:
-    
+
+    class _State:
+        
+        def __init__( self, name, active=False, isconnected=False, ifconfig=None ):
+            self.name = name
+            self.active = active
+            self.isconnected = isconnected
+            self.ifconfig = ifconfig
+            
+        def __repr__(self):
+            return "<%s active=%s isconnected=%s ifconfig=%s>" % ( self.name, self.active, self.isconnected, self.ifconfig )
+
     SOFTAP_CFG = "softap.cfg"
     WLAN_CFG = "wlan.cfg"
     WEBREPL_CFG = "webrepl_cfg.py"
@@ -52,8 +52,8 @@ class MPyConfigBase:
     
     def _state( self, name, inet = None ):
         if inet:
-            return _State( name, active=inet.active(), isconnected=inet.isconnected(), ifconfig=inet.ifconfig() )
-        return _State( name )
+            return MPyConfigBase._State( name, active=inet.active(), isconnected=inet.isconnected(), ifconfig=inet.ifconfig() )
+        return MPyConfigBase._State( name )
     
     def __repr__(self):
         wlan_state = self._state("wlan",self.wlan)

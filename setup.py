@@ -5,7 +5,7 @@ with open("README.MD", "r") as fh:
 
 setuptools.setup(
     name="mpyconfigbase", 
-    version="0.0.2",
+    version="0.0.3",
     author="k.r. goger",
     author_email="k.r.goger+mpyconfigbase@gmail.com",
     description="Configure MicroPython WLAN/AP/WebRepl startup with your own code",
