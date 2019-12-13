@@ -164,6 +164,9 @@ Reset the board during the deployment is here required since MicroPython needs t
             # configbase.softap_remove()
             # 
                
+## Limitations
 
+on esp8266 the combined startup with `start` will probably fail
+esp32 will work :-)
 
 
