@@ -166,7 +166,8 @@ Reset the board during the deployment is here required since MicroPython needs t
                
 ## Limitations
 
-on esp8266 the combined startup with `start` will probably fail
-esp32 will work :-)
+on esp8266 the combined startup with `start` will probably fail.
+
+on esp32 it will work :-)
 
 
