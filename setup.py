@@ -7,7 +7,7 @@ projectname = "mpyconfigbase"
 
 setuptools.setup(
     name=projectname, 
-    version="0.0.4a",
+    version="0.0.4",
     author="k.r. goger",
     author_email= f"k.r.goger+{projectname}@gmail.com",
     description="Configure MicroPython WLAN/AP/WebRepl startup with your own code",
