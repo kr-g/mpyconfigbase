@@ -67,6 +67,15 @@ def sample_code():
         """
         
         custom_boot_code = """
+            from mpyconfigbase import *
+            try:
+                configbase = MPyConfigBase()
+                configbase.start()
+            except Exception as ex:
+                print( "error:", ex )
+
+            print("set ntp time", configbase.ntp )
+
             import time
             while True:
                 print( "->", time.localtime( time.time() ) )
