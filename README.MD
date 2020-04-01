@@ -20,8 +20,25 @@ The python class code can be retrieved by calling:
     fnam, src = MPyConfigBase.get_class_source() # get the module code
     cfgbootcode = MPyConfigBase.get_boot_install_code() # get the minimal autconfig code
  
+ 
+## Sample Code (in boot.py)
 
-## Sample Code
+    from mpyconfigbase import *
+    try:
+        configbase = MPyConfigBase()
+        configbase.start()
+    except Exception as ex:
+        print( "error:", ex )
+
+    print("set ntp time", configbase.ntp )
+
+    import time
+    while True:
+        print( "->", time.localtime( time.time() ) )
+        time.sleep(1)
+
+
+## Sample Code (deployment)
 
 Some sample code for automatic deployment and configuration. In case of timeouts (error message: could not enter raw-repl) consider to use `with mpyc.timeout(1) as tout:` code block. 
 
