@@ -132,7 +132,7 @@ class MPyConfigBase:
         self.wlan_stop()
         uos.remove( MPyConfigBase.WLAN_CFG )
 
-    def wlan_start(self,active=True):
+    def wlan_start(self,active=True,setntp=True):
         """start wlan if configured before, otherwise do nothing"""
         try:
             import network
@@ -155,6 +155,9 @@ class MPyConfigBase:
                 self.wlan.connect(credits[0].strip(), credits[1].strip())
                 print( "wlan", self.wlan.ifconfig() )
                 
+                if setntp:
+                    self.settime()
+                
         except Exception as ex:
             print("wlan config error:", ex )
 
@@ -163,6 +166,20 @@ class MPyConfigBase:
         if self.wlan:
             self.wlan_start(active=False)
 
+    def settime( self, datetime=None, timeout=5 ):
+        if self.wlan:
+            import time
+            import ntptime
+            start=time.time()
+            self.ntp = False
+            while True:
+                now = time.time()
+                if now-start>timeout:                    
+                    return False
+                if self.wlan.isconnected():
+                    ntptime.settime()
+                    self.ntp = True
+                    return True
 
     def webrepl_config(self,passwd):
         """set webrepl password for automatic connection during startup"""

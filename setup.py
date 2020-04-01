@@ -3,15 +3,17 @@ import setuptools
 with open("README.MD", "r") as fh:
     long_description = fh.read()
 
+projectname = "mpyconfigbase"
+
 setuptools.setup(
-    name="mpyconfigbase", 
-    version="0.0.3",
+    name=projectname, 
+    version="0.0.4a",
     author="k.r. goger",
-    author_email="k.r.goger+mpyconfigbase@gmail.com",
+    author_email= f"k.r.goger+{projectname}@gmail.com",
     description="Configure MicroPython WLAN/AP/WebRepl startup with your own code",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/kr-g/mpyconfigbase",
+    url= f"https://github.com/kr-g/{projectname}",
     packages=setuptools.find_packages(),
     license = 'MIT',
     keywords = 'micropython utility shell automation deployment',
