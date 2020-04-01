@@ -1,7 +1,7 @@
 
 # MPyConfigBase
 
-Configure automatic startup of MicroPython WLAN / AP / WebRepl during boot 
+Configure automatic startup of MicroPython WLAN / AP / WebRepl / NTP time during boot 
 
 ## General information
 
