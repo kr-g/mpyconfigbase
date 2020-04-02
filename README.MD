@@ -54,11 +54,15 @@ The python class code can be retrieved by calling:
  
 ## Sample Code (deployment)
 
-Some sample code for automatic deployment and configuration. In case of timeouts (error message: could not enter raw-repl) consider to use `with mpyc.timeout(1) as tout:` code block. 
+Some sample code for automatic deployment and configuration is
+available [here on github](https://github.com/kr-g/mpyconfigbase/blob/master/sample.py)
 
-The code is also available [here on github](https://github.com/kr-g/mpyconfigbase)
+In case of timeouts (error message: could not enter raw-repl) consider to
+use `with mpyc.timeout(1) as tout:` code block. 
 
-Reset the board during the deployment is required since MicroPython needs to bring in the new code before the configuration can take place. If you follow the best practice given above this dont needs to be done.
+Reset the board during the deployment is required since MicroPython needs
+to bring in the new code before the configuration can take place.
+If you follow the best practice given above this dont needs to be done.
 
                
 ## Limitations
