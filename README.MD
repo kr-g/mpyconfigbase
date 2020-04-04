@@ -3,6 +3,11 @@
 
 Configure automatic startup of MicroPython WLAN / AP / WebRepl / NTP time during boot 
 
+## Related project
+
+[mpymodcore](https://github.com/kr-g/mpymodcore) is the successor of mpyconfigbase
+
+
 ## General information
 
 Use this together with [mpycntrl](https://pypi.org/project/mpycntrl/) for automation of the setup/deployment and configuration of MicroPython base interfaces. see also [mpycntrl on github](https://github.com/kr-g/mpycntrl)
